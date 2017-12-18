@@ -863,17 +863,28 @@ var baseUrl = 'https://color-swatch-api.herokuapp.com/';
 
 var getTopColor = function getTopColor() {
   fetch(baseUrl + '/api/v1/top_color').then(function (response) {
-    if (response.status !== 200) {
-      console.log('Looks like there was a problem. Status Code: ' + response.status);
-      return;
-    }
-
-    response.json().then(function (data) {
-      (0, _indexHandler.generateTopColor)(data);
-    });
+    handleResponse(response);
   }).catch(function (err) {
     console.log('Fetch Error :-S', err);
   });
+};
+
+var handleResponse = function handleResponse(response) {
+  if (response.status !== 200) {
+    //console.log('Looks like there was a problem. Status Code: ' +
+    //response.status);
+    //return;
+    badResponse(response);
+  };
+
+  response.json().then(function (data) {
+    (0, _indexHandler.generateTopColor)(data);
+  });
+};
+
+var badResponse = function badResponse(response) {
+  console.log('Looks like there was a problem. Status Code: ' + response.status);
+  return;
 };
 
 exports.getTopColor = getTopColor;
