@@ -76,6 +76,8 @@ var _colors = __webpack_require__(6);
 
 var _colors2 = _interopRequireDefault(_colors);
 
+__webpack_require__(7);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
@@ -822,6 +824,39 @@ module.exports = {
   "yellow": "#ffff00",
   "yellowgreen": "#9acd32"
 };
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _colorSwatchRequests = __webpack_require__(8);
+
+var onLoad = $(document).ready(function () {
+  (0, _colorSwatchRequests.getTopColor)();
+});
+
+module.exports = {
+  onLoad: onLoad
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getTopColor = function getTopColor() {
+  console.log('test');
+};
+
+exports.getTopColor = getTopColor;
 
 /***/ })
 /******/ ]);
