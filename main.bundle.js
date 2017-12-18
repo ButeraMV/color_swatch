@@ -832,15 +832,18 @@ module.exports = {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.onLoad = undefined;
+
 var _colorSwatchRequests = __webpack_require__(8);
 
 var onLoad = $(document).ready(function () {
-  (0, _colorSwatchRequests.getTopColor)();
+    (0, _colorSwatchRequests.getTopColor)();
 });
 
-module.exports = {
-  onLoad: onLoad
-};
+exports.onLoad = onLoad;
 
 /***/ }),
 /* 8 */
@@ -852,11 +855,44 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getTopColor = undefined;
+
+var _indexHandler = __webpack_require__(9);
+
+var baseUrl = 'https://color-swatch-api.herokuapp.com/';
+
 var getTopColor = function getTopColor() {
-  console.log('test');
+  fetch(baseUrl + '/api/v1/top_color').then(function (response) {
+    if (response.status !== 200) {
+      console.log('Looks like there was a problem. Status Code: ' + response.status);
+      return;
+    }
+
+    response.json().then(function (data) {
+      (0, _indexHandler.generateTopColor)(data);
+    });
+  }).catch(function (err) {
+    console.log('Fetch Error :-S', err);
+  });
 };
 
 exports.getTopColor = getTopColor;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var generateTopColor = function generateTopColor(data) {
+  $('.top-color').html(data.value + ' (' + data.color_count + ')');
+};
+
+exports.generateTopColor = generateTopColor;
 
 /***/ })
 /******/ ]);
