@@ -76,7 +76,7 @@ var _colors = __webpack_require__(6);
 
 var _colors2 = _interopRequireDefault(_colors);
 
-__webpack_require__(7);
+var _indexListener = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -833,17 +833,24 @@ module.exports = {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.onLoad = undefined;
+exports.clickColorize = exports.onLoad = undefined;
 
 var _colorSwatchRequests = __webpack_require__(8);
 
 var onLoad = $(document).ready(function () {
-    (0, _colorSwatchRequests.getTopColor)();
+  (0, _colorSwatchRequests.getTopColor)();
 });
 
+var clickColorize = function clickColorize() {
+  $('button').on('click', function () {
+    console.log('test');
+  });
+};
+
 exports.onLoad = onLoad;
+exports.clickColorize = clickColorize;
 
 /***/ }),
 /* 8 */
@@ -871,9 +878,6 @@ var getTopColor = function getTopColor() {
 
 var handleResponse = function handleResponse(response) {
   if (response.status !== 200) {
-    //console.log('Looks like there was a problem. Status Code: ' +
-    //response.status);
-    //return;
     badResponse(response);
   };
 
